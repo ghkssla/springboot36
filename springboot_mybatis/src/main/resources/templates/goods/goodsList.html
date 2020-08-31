@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	  <th:block layout:fragment="customTitle">	  	
+	  	<title th:text="${title}">상품목록조회</title>
+	  </th:block>
+	  <th:block layout:fragment="customContent">  
+	  	<form action="/getGoodsList" method="post">
+			<label>
+				<select name="sk"> 
+					<option value="g_code">상품코드</option>
+					<option value="g_name">상품명</option>
+					<option value ="g_price">가격</option>
+					<option value ="g_seller_id">판매자</option>
+					<option value ="g_reg_date">등록날짜</option>
+				</select>
+			</label>
+			<label>
+				<input type="text" name="sv">
+			</label>
+			<label>
+				<button type="submit">검색</button>
+			</label>
+		</form>				
+	  	<table border="1">
+	  		<thead>
+	  			<tr>
+	  				<th>상품코드</th>
+	  				<th>상품명</th>
+	  				<th>가격</th>
+	  				<th>판매자</th>
+	  				<th>등록날짜</th>	  				
+	  				<th>수정</th>
+	  				<th>삭제</th>
+	  			</tr>
+	  		</thead>	  	
+	  		<tbody>
+	  			<tr th:each="g : ${goodsList}">
+	  				<td th:text="${g.goodsCode}"></td>
+	  				<td th:text="${g.goodsName}"></td>
+	  				<td th:text="${g.goodsPrice}"></td>
+	  				<td th:text="${g.goodsSellerId}"></td>
+	  				<td th:text="${g.goodsRegDate}"></td>
+	  				<!-- get방식으로 입력받기(localhost/modifyMember?memberId=id001&memeberPw=pw001 ... 과 같음) -->
+	  				<td><a th:href="@{/modifyGoods(goodsSellerId=${g.goodsSellerId}
+	  											  ,goodsCode=${g.goodsCode})}">수정</a></td>
+	  				<td><a th:href="@{/removeGoods(goodsSellerId=${g.goodsSellerId})}">삭제</a></td>
+	  			</tr>
+	  		</tbody>	
+	  	</table>
+	  </th:block>
+</html>
