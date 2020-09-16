@@ -78,8 +78,7 @@
 			 		o_g_code=#{item.goodsCode}
 			 	</if>				
 			</foreach>
-		</trim>		
-				
+		</trim>						
 	</delete>
 	<delete id="removeGoods" parameterType="String"> <!-- 내가 받을 타입을 파라타입 -->
 		DELETE 

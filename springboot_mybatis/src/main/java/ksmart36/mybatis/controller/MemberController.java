@@ -141,7 +141,7 @@ public class MemberController {
 		System.out.println("회원이메일 -->"+memberEmail);
 		System.out.println("회원주소 -->"+memberAddr);
 		
-		//memberService.addMember(member);
+		memberService.addMember(member);
 		return "redirect:/getMemberList";		
 	}
 	
