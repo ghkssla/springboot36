@@ -88,6 +88,15 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
+	@PostMapping("/removeMember")
+	public String removeMember(Member member) {
+		if(member.getMemberId() != null&& !"".equals(member.getMemberId())
+				&& member.getMemberPw()!= null&& !"".equals(member.getMemberPw())) {
+			memberService.removeMember(member.getMemberId(), member.getMemberPw());
+		}
+		return "redirect:/getMemberList";
+	}
+	
 	@GetMapping("/removeMember")
 	public String removeMember(Member member, Model model) {
 		if(member.getMemberId() != null&& !"".equals(member.getMemberId())) {
@@ -95,14 +104,6 @@ public class MemberController {
 			model.addAttribute("memberId", member.getMemberId());
 		}
 		return "member/removeMember";
-	}
-	@PostMapping("/removeMember")
-	public String removeMember(Member member) {
-		if(member.getMemberId() != null&& !"".equals(member.getMemberId())
-			&& member.getMemberPw()!= null&& !"".equals(member.getMemberPw())) {
-			memberService.removeMember(member.getMemberId(), member.getMemberPw());
-		}
-		return "redirect:/getMemberList";
 	}
 	
 	@PostMapping("/modifyMember")
